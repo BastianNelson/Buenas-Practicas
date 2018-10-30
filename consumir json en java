@@ -1,0 +1,41 @@
+ public void consumirJSON()
+    {
+//        String url="http://www.objgen.com/json/models/BUu";
+        String url="https://www.bci.cl/base-bci/sitio-privado/cvd/posts/banner-cvd-express";
+        
+        
+        ClientConfig clientConfig = new DefaultClientConfig();
+        clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+        WebResource web = Client.create(clientConfig).resource(url);
+        ClientResponse response =  web.accept(MediaType.APPLICATION_JSON).header("content-type", MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        
+        
+        
+        if (response.getStatus() == 200 || response.getStatus() == 201) {
+            //retorno = response.getEntity(NumeroInstanciaTO.class);
+        }
+        try {
+        Client client = Client.create();
+        
+        WebResource webResource = client
+            .resource("https://www.bci.cl/base-bci/sitio-privado/cvd/posts/banner-cvd-express");
+        ClientResponse response1 = webResource.accept("application/json")
+            .get(ClientResponse.class);
+        
+        if (response.getStatus() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : "
+             + response.getStatus());
+         }
+
+         String output = response.getEntity(String.class);
+
+         System.out.println("Output from Server .... \n");
+         System.out.println(output);
+
+       } catch (Exception e) {
+
+         e.printStackTrace();
+
+       }
+
+    }
